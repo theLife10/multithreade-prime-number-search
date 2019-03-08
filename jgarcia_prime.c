@@ -71,23 +71,13 @@ void *mini_shell(void *param)
 
 int test_prime(int n)
 {
-	int number = 1, a, integer = 2;
-	while (number < 550)
-	{
-		number++;
-		for (a = 2; a <= integer; a++)
-		{
-			if (integer % a == 0)
-			{
-				break;
-			}
-		}
-		if (a == integer)
-		{
-
-			printf("%d\n", number);
-		}
-		integer++;
-	}
+     int i;
+    for (i = 2; i <= n; ++i) {
+        if (n % i == 0) {
+            return 1;
+            break;
+        } else
+        return 0;
+    }
 	return 0;
 }
