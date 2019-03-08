@@ -14,8 +14,23 @@
 sPRIME_THREAD primeThreadData[MAX_THREADS];
 int numThreads;
 
+//comment
+//write to files
+//concat two files togetther
+
 void *prime_search(void *param)
 {
+	sPRIME_THREAD *p; //pointer to the structure
+	p = param;
+
+	for (p->current = p->low; p->current < p->high; p->current++)
+	{
+		if (test_prime(p->current) == 1)
+		{
+			//write to two indivual files
+		}
+	}
+	pthread_exit(0);
 }
 
 void *mini_shell(void *param)
@@ -71,13 +86,16 @@ void *mini_shell(void *param)
 
 int test_prime(int n)
 {
-     int i;
-    for (i = 2; i <= n; ++i) {
-        if (n % i == 0) {
-            return 1;
-            break;
-        } else
-        return 0;
-    }
-	return 0;
+	int i;
+	for (i = 2; i <= n; ++i)
+	{
+		if (n % i == 0)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+	}
 }

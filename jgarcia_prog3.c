@@ -10,18 +10,17 @@
 #include <fcntl.h>
 #include "jgarcia_prime.h"
 
-#define BUFFER_SIZE	1000000
+#define BUFFER_SIZE 1000000
 
-unsigned char buffer[BUFFER_SIZE+1];
+unsigned char buffer[BUFFER_SIZE + 1];
 unsigned char fileName[100];
 FILE *primeFile;
 FILE *primeThreadFile;
 
-
 int main(int argc, char *argv[])
 {
   int i, bytesRead, bytesWritten;
-  pthread_t tid[MAX_THREADS]; 
+  pthread_t tid[MAX_THREADS];
   pthread_t tidshell;
   pthread_attr_t attr;
   time_t before, after;
@@ -32,11 +31,22 @@ int main(int argc, char *argv[])
   /* Setup threads to find prime numbers */
   pthread_attr_init(&attr);
   numThreads = 2;
-  
+
+  //put it here
+  //learn how to offload both threads do the same amount of work
+  //
+  primeThreadData[0].num = 0;
+  primeThreadData[0].low = 1;
+  primeThreadData[0].high = 4000000000; //thresh hold
+
+  primeThreadData[1].num = 1;
+  primeThreadData[1].low = 4000000000;  //thresh hold
+  primeThreadData[1].high = 6000000000; //40
 
   /* Setup a mini shell thread to provide interactivity with the user */
-  pthread_create(&tidshell,&attr,mini_shell,NULL);
-  
+  pthread_create(&tidshell, &attr, mini_shell, NULL);
+  pthread_create(&tid[0], &attr, prime_search, &(primeThreadData[0]));
+  pthread_create(&tid[1], &attr, prime_search, &(primeThreadData[1]));
 #if 0
 
   /* Create primes output file */
@@ -82,11 +92,11 @@ int main(int argc, char *argv[])
 #endif
 
   sleep(20);
-  
+
   /* Lastly, kill the interaction thread */
   pthread_kill(tidshell, SIGKILL);
+  pthread_kill(tid[0], SIGKILL);
+  pthread_kill(tid[1], SIGKILL);
 
   return 0;
-
 }
-
