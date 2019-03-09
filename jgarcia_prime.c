@@ -15,7 +15,6 @@ sPRIME_THREAD primeThreadData[MAX_THREADS];
 int numThreads;
 
 //comment
-//write to files
 //concat two files togetther
 
 void *prime_search(void *param)
@@ -23,13 +22,30 @@ void *prime_search(void *param)
 	sPRIME_THREAD *p; //pointer to the structure
 	p = param;
 
+	FILE *f1;
+	FILE *f2;
+
+	f1 = fopen("/home/jesusgarcia/jgarcia_prog3/file1.txt", "w+");
+	f2 = fopen("/home/jesusgarcia/jgarcia_prog3/file2.txt", "w+");
+
 	for (p->current = p->low; p->current < p->high; p->current++)
 	{
 		if (test_prime(p->current) == 1)
 		{
 			//write to two indivual files
+
+			if (p->current <= 2500000)
+			{
+				fprintf(f1, "%d\n", p->current);
+			}
+			else
+			{
+				fprintf(f2, "%d\n", p->current);
+			}
 		}
 	}
+	fclose(f1);
+	fclose(f2);
 	pthread_exit(0);
 }
 
