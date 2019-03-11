@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "jgarcia_prime.h"
+#include <math.h>
 
 /* Global variables that are shared */
 sPRIME_THREAD primeThreadData[MAX_THREADS];
@@ -25,8 +26,8 @@ void *prime_search(void *param)
 	FILE *f1;
 	FILE *f2;
 
-	f1 = fopen("/home/jesusgarcia/jgarcia_prog3/file1.txt", "w+");
-	f2 = fopen("/home/jesusgarcia/jgarcia_prog3/file2.txt", "w+");
+	f1 = fopen("/home/jesusgarcia/jgarcia_prog3/primes1.txt", "w+");
+	f2 = fopen("/home/jesusgarcia/jgarcia_prog3/primes2.txt", "w+");
 
 	for (p->current = p->low; p->current < p->high; p->current++)
 	{
@@ -102,16 +103,27 @@ void *mini_shell(void *param)
 
 int test_prime(int n)
 {
-	int i;
-	for (i = 2; i <= n; ++i)
+	// if it is less than 2 return 0
+	if (n < 2)
 	{
+		return 0;
+	}
+	//check if it is divisble by 2
+	if (n % 2 == 0)
+	{
+		//put this to skip passed 2
+		return n == 2;
+	}
+	//limit will be sqrt of n
+	int limit = sqrt(n);
+	//will start at 3 finish up to the limit and jumps by 2
+	for (int i = 3; i <= limit; i += 2)
+	{
+		//if it is prime then return 0
 		if (n % i == 0)
 		{
 			return 0;
 		}
-		else
-		{
-			return 1;
-		}
 	}
+	return 1;
 }
