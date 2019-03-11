@@ -42,12 +42,11 @@ int main(int argc, char *argv[])
   primeThreadData[1].num = 1;
   primeThreadData[1].low = 2500000;  //thresh hold
   primeThreadData[1].high = 5000000; //40
-  0;
   /* Setup a mini shell thread to provide interactivity with the user */
   pthread_create(&tidshell, &attr, mini_shell, NULL);
   pthread_create(&tid[0], &attr, prime_search, &(primeThreadData[0]));
   pthread_create(&tid[1], &attr, prime_search, &(primeThreadData[1]));
-#if 0
+  //#if 0
 
   /* Create primes output file */
   primeFile = fopen("primest", "w");
@@ -89,7 +88,7 @@ int main(int argc, char *argv[])
   /* Record execution time */
   after = time(NULL);
   printf("\nPrime search done after %ld seconds\n", after - before);
-#endif
+  //#endif
 
   sleep(20);
 

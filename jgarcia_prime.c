@@ -10,12 +10,12 @@
 #include <fcntl.h>
 #include "jgarcia_prime.h"
 #include <math.h>
+#include <errno.h>
 
 /* Global variables that are shared */
 sPRIME_THREAD primeThreadData[MAX_THREADS];
 int numThreads;
 
-//comment
 //concat two files togetther
 
 void *prime_search(void *param)
@@ -35,7 +35,7 @@ void *prime_search(void *param)
 		{
 			//write to two indivual files
 
-			if (p->current <= 2500000)
+			if (p->current <= p->high)
 			{
 				fprintf(f1, "%d\n", p->current);
 			}
