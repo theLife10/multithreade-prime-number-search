@@ -26,8 +26,8 @@ void *prime_search(void *param)
 	FILE *f1;
 	FILE *f2;
 
-	f1 = fopen("/home/jesusgarcia/jgarcia_prog3/primes1.txt", "w+");
-	f2 = fopen("/home/jesusgarcia/jgarcia_prog3/primes2.txt", "w+");
+	f1 = fopen("/home/jesusgarcia/jgarcia_prog3/primes1", "w+");
+	f2 = fopen("/home/jesusgarcia/jgarcia_prog3/primes2", "w+");
 
 	for (p->current = p->low; p->current < p->high; p->current++)
 	{
