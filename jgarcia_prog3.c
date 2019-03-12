@@ -1,6 +1,6 @@
 // UT El Paso EE 4374 Assignment 3
 // Multi-threaded Prime Number Search
-// Author: ???
+// Author: Jesus Garcia
 //
 #include <pthread.h>
 #include <stdio.h>
@@ -32,22 +32,22 @@ int main(int argc, char *argv[])
   pthread_attr_init(&attr);
   numThreads = 2;
 
-  //put it here
-  //learn how to offload both threads do the same amount of work
-  //
-  primeThreadData[0].num = 0;
-  primeThreadData[0].low = 1;
-  primeThreadData[0].high = 2500000; //thresh hold
+  //Setted up parameters
+  primeThreadData[0].num = 0;        //thread 1
+  primeThreadData[0].low = 1;        //start
+  primeThreadData[0].high = 2500000; //choose 2,500,000 since it is half of 5,000,000
 
-  primeThreadData[1].num = 1;
-  primeThreadData[1].low = 2500000;  //thresh hold
-  primeThreadData[1].high = 5000000; //40
+  primeThreadData[1].num = 1;        //thread 2
+  primeThreadData[1].low = 2500000;  //start at the thresh hold
+  primeThreadData[1].high = 5000000; //end at 5 million
   /* Setup a mini shell thread to provide interactivity with the user */
-  pthread_create(&tidshell, &attr, mini_shell, NULL);
-  pthread_create(&tid[0], &attr, prime_search, &(primeThreadData[0]));
-  pthread_create(&tid[1], &attr, prime_search, &(primeThreadData[1]));
-  //#if 0
 
+  //this is creating the prethreads
+  pthread_create(&tidshell, &attr, mini_shell, NULL);                  //passed thread id for shell, address of attribute , minishell method
+  pthread_create(&tid[0], &attr, prime_search, &(primeThreadData[0])); //address of thread 1, attribute, prime_search method,and address
+  pthread_create(&tid[1], &attr, prime_search, &(primeThreadData[1])); //address of thread 2, attribute, prime_search method, and address 2
+
+  // this concats the files and deleted the #if 0
   /* Create primes output file */
   primeFile = fopen("primest", "w");
   fclose(primeFile);
@@ -88,7 +88,6 @@ int main(int argc, char *argv[])
   /* Record execution time */
   after = time(NULL);
   printf("\nPrime search done after %ld seconds\n", after - before);
-  //#endif
 
   sleep(20);
 
