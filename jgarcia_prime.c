@@ -34,8 +34,8 @@ void *prime_search(void *param)
 		if (test_prime(p->current) == 1)
 		{
 			//write to two indivual files
-
-			if (p->current <= p->high)
+			//chuy
+			if (p->current <= 2500000)
 			{
 				fprintf(f1, "%d\n", p->current);
 			}
