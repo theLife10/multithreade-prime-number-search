@@ -37,10 +37,10 @@ int main(int argc, char *argv[])
   //
   primeThreadData[0].num = 0;
   primeThreadData[0].low = 1;
-  primeThreadData[0].high = 4000000; //thresh hold
+  primeThreadData[0].high = 2500000; //thresh hold
 
   primeThreadData[1].num = 1;
-  primeThreadData[1].low = 4000000;  //thresh hold
+  primeThreadData[1].low = 2500000;  //thresh hold
   primeThreadData[1].high = 5000000; //40
   /* Setup a mini shell thread to provide interactivity with the user */
   pthread_create(&tidshell, &attr, mini_shell, NULL);
